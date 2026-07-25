@@ -1,60 +1,62 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(
-      const Duration(seconds: 3),
-      () {
-        if (!mounted) return;
-        context.go('/home');
-      },
-    );
+    Timer(const Duration(seconds: 3), () {
+      if (!mounted) return;
+
+      context.go('/home');
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        alignment: Alignment.center,
+        width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
             colors: [
-              Color(0xff0F172A),
-              Color(0xff1E293B),
+              Color(0xFF09090B),
+              Color(0xFF1E293B),
             ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
           ),
         ),
-        child: Text(
-          "ARISE",
-          style: Theme.of(context)
-              .textTheme
-              .displayMedium
-              ?.copyWith(
-                fontWeight: FontWeight.bold,
-                letterSpacing: 8,
-                color: Colors.white,
-              ),
-        )
-            .animate()
-            .fadeIn(duration: 1200.ms)
-            .scale(begin: const Offset(.7, .7))
-            .then()
-            .shimmer(duration: 1800.ms),
+        child: Center(
+          child: Text(
+            "ARISE",
+            style: Theme.of(context)
+                .textTheme
+                .displayMedium
+                ?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 8,
+                ),
+          )
+              .animate()
+              .fadeIn(duration: 900.ms)
+              .scale(begin: const Offset(.8, .8))
+              .then()
+              .shimmer(duration: 1400.ms),
+        ),
       ),
     );
   }

@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ARISE'),
+        centerTitle: true,
       ),
       body: const Center(
         child: Column(
@@ -28,7 +29,7 @@ class HomePage extends StatelessWidget {
             ),
             Gap(8),
             Text(
-              'Sprint 1 Complete',
+              'Sprint 1 • Module 1 Complete',
             ),
           ],
         ),
