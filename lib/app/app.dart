@@ -1,42 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-import 'theme/app_theme.dart';
+import '../core/theme/app_theme.dart';
+import 'router.dart';
 
 class AriseApp extends StatelessWidget {
   const AriseApp({super.key});
 
-  static void start() {
-    runApp(const AriseApp());
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ARISE',
+    final GoRouter router = AppRouter.router;
+
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
-      home: const SplashScreen(),
-    );
-  }
-}
-
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          "ARISE",
-          style: TextStyle(
-            fontSize: 42,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      title: 'ARISE',
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      routerConfig: router,
     );
   }
 }
