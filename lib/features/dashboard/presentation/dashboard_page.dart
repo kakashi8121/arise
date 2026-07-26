@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class HomePage extends StatelessWidget {
               Icons.auto_awesome,
               size: 80,
             ),
-            Gap(20),
+            SizedBox(height: 20),
             Text(
               'Welcome to ARISE',
               style: TextStyle(
@@ -27,9 +26,10 @@ class HomePage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Gap(8),
+            SizedBox(height: 8),
             Text(
-              'Sprint 1 • Module 1 Complete',
+              'Dashboard',
+              style: TextStyle(fontSize: 18),
             ),
           ],
         ),

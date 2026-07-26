@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
-import '../features/home/home_page.dart';
 import '../features/splash/presentation/splash_screen.dart';
+import 'shell/app_shell.dart';
 
 class AppRouter {
   AppRouter._();
@@ -14,8 +14,8 @@ class AppRouter {
         builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
-        path: '/home',
-        builder: (context, state) => const HomePage(),
+        path: '/dashboard',
+        builder: (context, state) => const AppShell(),
       ),
     ],
   );
