@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
+import '../app/shell/app_shell.dart';
 import '../features/splash/presentation/splash_screen.dart';
-import 'shell/app_shell.dart';
 
 class AppRouter {
   AppRouter._();

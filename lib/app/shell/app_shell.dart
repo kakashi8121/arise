@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../features/dashboard/presentation/dashboard_page.dart';
+import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/inventory/presentation/inventory_page.dart';
 import '../../features/profile/presentation/profile_page.dart';
 import '../../features/quests/presentation/quests_page.dart';
