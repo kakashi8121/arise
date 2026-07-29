@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/hunter_card.dart';
+import '../widgets/stats_card.dart';
+import '../widgets/xp_card.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -18,6 +20,10 @@ class DashboardPage extends StatelessWidget {
           child: Column(
             children: [
               HunterCard(),
+              SizedBox(height: 20),
+              XPCard(),
+              SizedBox(height: 20),
+              StatsCard(),
             ],
           ),
         ),
