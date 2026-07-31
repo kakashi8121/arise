@@ -66,4 +66,26 @@ class QuestNotifier extends StateNotifier<List<Quest>> {
       return quest;
     }).toList();
   }
+
+  int get completedDailyQuests {
+    return state
+        .where((q) => q.type == QuestType.daily && q.completed)
+        .length;
+  }
+
+  int get totalDailyQuests {
+    return state.where((q) => q.type == QuestType.daily).length;
+  }
+
+  int get earnedXpToday {
+    return state
+        .where((q) => q.type == QuestType.daily && q.completed)
+        .fold(0, (sum, q) => sum + q.xpReward);
+  }
+
+  double get dailyProgress {
+    if (totalDailyQuests == 0) return 0;
+
+    return completedDailyQuests / totalDailyQuests;
+  }
 }

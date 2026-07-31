@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import '../widgets/daily_progress_card.dart';
 import '../widgets/daily_quest_card.dart';
 import '../widgets/hunter_card.dart';
 import '../widgets/quick_actions_card.dart';
@@ -26,22 +27,37 @@ class DashboardPage extends StatelessWidget {
                   .animate()
                   .fadeIn(duration: 400.ms)
                   .slideY(begin: .1),
+
               const SizedBox(height: 20),
+
               const XPCard()
                   .animate()
                   .fadeIn(delay: 100.ms, duration: 400.ms)
                   .slideY(begin: .1),
+
               const SizedBox(height: 20),
+
+              const DailyProgressCard()
+                  .animate()
+                  .fadeIn(delay: 150.ms, duration: 400.ms)
+                  .slideY(begin: .1),
+
+              const SizedBox(height: 20),
+
               const StatsCard()
                   .animate()
                   .fadeIn(delay: 200.ms, duration: 400.ms)
                   .slideY(begin: .1),
+
               const SizedBox(height: 20),
+
               const DailyQuestCard()
                   .animate()
                   .fadeIn(delay: 300.ms, duration: 400.ms)
                   .slideY(begin: .1),
+
               const SizedBox(height: 20),
+
               const QuickActionsCard()
                   .animate()
                   .fadeIn(delay: 400.ms, duration: 400.ms)
