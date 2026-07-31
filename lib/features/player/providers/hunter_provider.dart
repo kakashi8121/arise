@@ -11,16 +11,16 @@ class HunterNotifier extends StateNotifier<Hunter> {
   HunterNotifier()
       : super(
           const Hunter(
-            id: 'player_001',
-            name: 'Shadow Monarch',
-            level: 1,
+            name: 'Kakashi',
             rank: HunterRank.e,
-            xp: 120,
-            maxXp: 500,
+            level: 1,
+            xp: 0,
+            maxXp: 100,
+            gold: 500,
             hp: 100,
             maxHp: 100,
-            mp: 50,
-            maxMp: 50,
+            mp: 60,
+            maxMp: 60,
             strength: 10,
             agility: 10,
             vitality: 10,
@@ -29,30 +29,35 @@ class HunterNotifier extends StateNotifier<Hunter> {
         );
 
   void gainXp(int amount) {
-    final newXp = state.xp + amount;
+    var hunter = state;
+    var newXp = hunter.xp + amount;
+    var newLevel = hunter.level;
+    var newMaxXp = hunter.maxXp;
 
-    if (newXp >= state.maxXp) {
-      state = state.copyWith(
-        level: state.level + 1,
-        xp: newXp - state.maxXp,
-        maxXp: state.maxXp + 200,
-      );
-    } else {
-      state = state.copyWith(
-        xp: newXp,
-      );
+    while (newXp >= newMaxXp) {
+      newXp -= newMaxXp;
+      newLevel += 1;
+      newMaxXp = (newMaxXp * 1.2).round();
     }
-  }
 
-  void takeDamage(int amount) {
-    state = state.copyWith(
-      hp: (state.hp - amount).clamp(0, state.maxHp),
+    state = hunter.copyWith(
+      level: newLevel,
+      xp: newXp,
+      maxXp: newMaxXp,
     );
   }
 
-  void restoreHp() {
+  void addGold(int amount) {
     state = state.copyWith(
-      hp: state.maxHp,
+      gold: state.gold + amount,
+    );
+  }
+
+  void spendGold(int amount) {
+    if (state.gold < amount) return;
+
+    state = state.copyWith(
+      gold: state.gold - amount,
     );
   }
 }

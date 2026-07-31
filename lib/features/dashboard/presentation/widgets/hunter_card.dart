@@ -40,7 +40,7 @@ class HunterCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'Rank ${hunter.rankLabel} Hunter',
+                  'Rank ${hunter.rank.name.toUpperCase()} Hunter',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.grey[400],
                       ),

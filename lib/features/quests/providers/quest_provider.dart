@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../player/providers/hunter_provider.dart';
 import '../models/quest.dart';
 
-final questProvider =
-    StateNotifierProvider<QuestNotifier, List<Quest>>((ref) {
+final questProvider = StateNotifierProvider<QuestNotifier, List<Quest>>((ref) {
   return QuestNotifier(ref);
 });
 
@@ -17,6 +16,7 @@ class QuestNotifier extends StateNotifier<List<Quest>> {
             description: 'Complete 100 push-ups today.',
             type: QuestType.daily,
             xpReward: 50,
+            goldReward: 100,
             completed: false,
           ),
           Quest(
@@ -25,6 +25,7 @@ class QuestNotifier extends StateNotifier<List<Quest>> {
             description: 'Complete 100 sit-ups today.',
             type: QuestType.daily,
             xpReward: 50,
+            goldReward: 100,
             completed: false,
           ),
           Quest(
@@ -33,6 +34,7 @@ class QuestNotifier extends StateNotifier<List<Quest>> {
             description: 'Run a total distance of 10 km.',
             type: QuestType.daily,
             xpReward: 100,
+            goldReward: 200,
             completed: false,
           ),
         ]);
@@ -43,12 +45,9 @@ class QuestNotifier extends StateNotifier<List<Quest>> {
     final updated = state.map((quest) {
       if (quest.id == questId && !quest.completed) {
         ref.read(hunterProvider.notifier).gainXp(quest.xpReward);
-
-        return quest.copyWith(
-          completed: true,
-        );
+        ref.read(hunterProvider.notifier).addGold(quest.goldReward);
+        return quest.copyWith(completed: true);
       }
-
       return quest;
     }).toList();
 
@@ -58,34 +57,24 @@ class QuestNotifier extends StateNotifier<List<Quest>> {
   void resetDailyQuests() {
     state = state.map((quest) {
       if (quest.type == QuestType.daily) {
-        return quest.copyWith(
-          completed: false,
-        );
+        return quest.copyWith(completed: false);
       }
-
       return quest;
     }).toList();
   }
 
-  int get completedDailyQuests {
-    return state
-        .where((q) => q.type == QuestType.daily && q.completed)
-        .length;
-  }
+  int get completedDailyQuests =>
+      state.where((q) => q.type == QuestType.daily && q.completed).length;
 
-  int get totalDailyQuests {
-    return state.where((q) => q.type == QuestType.daily).length;
-  }
+  int get totalDailyQuests =>
+      state.where((q) => q.type == QuestType.daily).length;
 
-  int get earnedXpToday {
-    return state
-        .where((q) => q.type == QuestType.daily && q.completed)
-        .fold(0, (sum, q) => sum + q.xpReward);
-  }
+  int get earnedXpToday => state
+      .where((q) => q.type == QuestType.daily && q.completed)
+      .fold(0, (sum, q) => sum + q.xpReward);
 
   double get dailyProgress {
     if (totalDailyQuests == 0) return 0;
-
     return completedDailyQuests / totalDailyQuests;
   }
 }
